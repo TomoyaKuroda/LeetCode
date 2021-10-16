@@ -70,12 +70,7 @@
  *
  */
 
-// @lc code=start
-/**
- * @param {number[]} nums1
- * @param {number[]} nums2
- * @return {number}
- */
+/*
 var findMedianSortedArrays = function (nums1, nums2) {
   let array = [],
     left = 0,
@@ -93,10 +88,36 @@ var findMedianSortedArrays = function (nums1, nums2) {
   }
   //[1,2,3,4]
   if (array.length % 2 === 0) {
-    output = (array[Math.floor(array.length / 2)] + array[Math.floor(array.length / 2) - 1]) / 2;
+    output = (array[array.length / 2] + array[array.length / 2 - 1]) / 2;
   } else {
     output = array[Math.floor(array.length / 2)];
   }
   return output;
+};
+// @lc code=start
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number}
+ */
+var findMedianSortedArrays = function (nums1, nums2) {
+  let output = [];
+  while (nums1.length && nums2.length) {
+    if (nums1[0] < nums2[0]) {
+      output.push(nums1.shift());
+    } else {
+      output.push(nums2.shift());
+    }
+  }
+  if (nums1.length) {
+    output = output.concat(nums1);
+  } else {
+    output = output.concat(nums2);
+  }
+  if (output.length % 2 === 0) {
+    return (output[output.length / 2] + output[output.length / 2 - 1]) / 2;
+  } else {
+    return output[Math.floor(output.length / 2)];
+  }
 };
 // @lc code=end
